@@ -5,7 +5,6 @@ import folium
 import os
 from dotenv import load_dotenv
 
-load_dotenv()
 
 def fetch_coordinates(apikey, address):
     base_url = "https://geocode-maps.yandex.ru/1.x"
@@ -24,7 +23,9 @@ def fetch_coordinates(apikey, address):
     lon, lat = most_relevant['GeoObject']['Point']['pos'].split(" ")
     return float(lat), float(lon)
 
+
 def main():
+    load_dotenv()
     apikey = os.getenv('GEOCODER_APIKEY')
 
     user_location = input("Где вы находитесь? ")
@@ -63,6 +64,7 @@ def main():
         ).add_to(m)
 
         m.save("index.html")
+        
 
 if __name__ == "__main__":
     main()
